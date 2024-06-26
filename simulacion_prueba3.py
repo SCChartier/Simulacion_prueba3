@@ -20,6 +20,19 @@ def listar_pedidos():
     for i in L_pedidos:
         print(i)
 
+def imprimir_hoja(comuna):
+    l = []  #### Es la lista que guardara los pedidos de la comuna solicitada
+    for pedido in L_pedidos:  # pedido = [nombre, apellido, direccion, comuna, 5kg, 15kg, 45kg]
+        if pedido[3] == comuna:
+            l.append(pedido)
+    #### Escribir archivo
+    arch = open("Hoja de ruta_" + comuna + ".txt", "w")
+    for pedido in l:
+        s = "--".join(pedido)
+        arch.write(s + "\n")
+    arch.close()
+    print("Archivo creado con exito.")
+
 ##### MAIN
 L_pedidos = []  # [[], [], [], [] ...]
 while True:
@@ -36,5 +49,7 @@ while True:
         listar_pedidos()   ### llamamos  a la funcion
     elif op == "3":
         print("Ingresando a opcion 3")
+        comuna = input("Ingrese comuna: ")
+        imprimir_hoja(comuna)
     else: 
         print("Ingrese una opcion valida.")
